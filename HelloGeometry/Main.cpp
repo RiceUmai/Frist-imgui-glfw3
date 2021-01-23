@@ -1,30 +1,18 @@
-﻿#include <glad/glad.h>
-#include <GLFW/glfw3.h>
+﻿#include "imgui/imgui.h"
+#include "imgui/imgui_impl_glfw.h"
+#include "imgui/imgui_impl_opengl3.h"
+#include <stdio.h>
 
-#include <glm/glm.hpp>
-#include <glm/gtc/matrix_transform.hpp>
-#include <glm/gtc/type_ptr.hpp>
-
-#include <iostream>
-
-#include "Shader.h"
-#include "Model.h"
-#include "Camera.h"
-#include "Setting.h"
+#include "Game.h"
+#include "UI_Manager.h"
 
 void framebuffer_size_callback(GLFWwindow* window, int width, int height);
-void processInput(GLFWwindow* window);
-
-// settings
-const unsigned int SCR_WIDTH = 800;
-const unsigned int SCR_HEIGHT = 600;
-Camera camera(glm::vec3(0.0f, 0.0f, 3.0f));
+void Renderer();
 
 float FristTime;
-float LarstTime;
-float deltaTime;
+float delta;
 
-unsigned int loadTexture(char const* path);
+GLFWwindow* window;
 
 int main()
 {
@@ -41,7 +29,7 @@ int main()
 
 	// glfw window creation
 	// --------------------
-	GLFWwindow* window = glfwCreateWindow(SCR_WIDTH, SCR_HEIGHT, "Hellow Grmotry", NULL, NULL);
+	window = glfwCreateWindow(Setting::SCR_WIDTH, Setting::SCR_HEIGHT, "Hellow Grmotry", NULL, NULL);
 	if (window == NULL)
 	{
 		std::cout << "Failed to create GLFW window" << std::endl;
@@ -58,131 +46,47 @@ int main()
 		std::cout << "Failed to initialize GLAD" << std::endl;
 		return -1;
 	}
-
-	//=========================
-	float poins[] = {
-		-0.5f,  0.5f, 1.0f, 0.0f, 0.0f,
-		 0.5f,  0.5f, 0.0f, 1.0f, 0.0f,
-		 0.5f, -0.5f, 0.0f, 0.0f, 1.0f,
-		-0.5f, -0.5f, 1.0f, 1.0f, 0.0f,
-	};
-
-	float transparentVertices[] = {
-		-0.5f,  0.5f, 1.0f, 0.0f,
-		 0.5f,  0.5f, 0.0f, 1.0f,
-		 0.5f, -0.5f, 0.0f, 0.0f,
-		
-		 0.5f, -0.5f, 0.0f, 0.0f,
-		-0.5f, -0.5f, 1.0f, 0.0f,
-		-0.5f,  0.5f, 1.0f, 0.0f,
-	};
-
-	unsigned int VAO, VBO;
-	glGenVertexArrays(1, &VAO);
-	glGenBuffers(1, &VBO);
-	glBindVertexArray(VAO);
-	glBindBuffer(GL_ARRAY_BUFFER, VBO);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(poins), &poins, GL_STATIC_DRAW);
-	glEnableVertexAttribArray(0);
-	glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)0);
-	glEnableVertexAttribArray(1);
-	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)(2 * sizeof(float)));
-
-	//unsigned int transparentVAO, transparentVBO;
-	//glGenVertexArrays(1, &transparentVAO);
-	//glGenBuffers(1, &transparentVBO);
-	//glBindVertexArray(transparentVAO);
-	//glBindBuffer(GL_ARRAY_BUFFER, transparentVBO);
-	//glBufferData(GL_ARRAY_BUFFER, sizeof(transparentVertices), transparentVertices, GL_STATIC_DRAW);
-	//glEnableVertexAttribArray(0);
-	//glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 4 * sizeof(float), (void*)0);
-	//glEnableVertexAttribArray(1);
-	//glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 4 * sizeof(float), (void*)(2 * sizeof(float)));
-	//glBindVertexArray(0);
-
-
-	//=========================
-	//unsigned int transparentTexture = loadTexture("texture/container2.png");
-
-	glm::mat4 model = glm::mat4(1.0f);
-
-	//=========================
-
-	Model modeltest("model/newell_teaset/teapot.obj");
-	Shader modelShader("Shader/model_loading.vs", "Shader/model_loading.fs", "Shader/explode.gs");
-	Shader testShader("Shader/test.vs", "Shader/test.fs", "Shader/test.gs");
-
-
+	
 	// render loop
 	// -----------
-	while (!glfwWindowShouldClose(window))
-	{
-		FristTime = glfwGetTime();
-		// input
-		// -----
-		processInput(window);
-
-		// render
-		// ------
-		glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
-		glClear(GL_COLOR_BUFFER_BIT);
-
-		glBindVertexArray(VAO);
-		testShader.use();
-		glDrawArrays(GL_POINTS, 0, 4);
-
-		//glBindVertexArray(transparentVAO);
-		//testShader2.use();
-		//glBindTexture(GL_TEXTURE_2D, transparentTexture);
-		//testShader2.setFloat("time", glfwGetTime());
-		//glDrawArrays(GL_TRIANGLES, 0, 6);
-
-
-		glm::mat4 projection = glm::perspective(glm::radians(camera.Zoom), (float)SCR_WIDTH / (float)SCR_HEIGHT, 0.1f, 100.0f);
-		glm::mat4 view = camera.GetViewMatrix();
-		
-		modelShader.use();
-		modelShader.setMat4("projection", projection);
-		modelShader.setMat4("view", view);
-
-		glm::mat4 model = glm::mat4(1.0f);
-		model = glm::translate(model, glm::vec3(0.0f, 0.0f, 0.0f)); // translate it down so it's at the center of the scene
-		model = glm::rotate(model, glm::radians((float)glfwGetTime() * 10), glm::vec3(0.0f, 1.0f, 0.0f));
-		model = glm::scale(model, glm::vec3(0.2f, 0.2f, 0.2f));	// it's a bit too big for our scene, so scale it down
-		modelShader.setMat4("model", model);
-		modelShader.setFloat("time", glfwGetTime());
-		modeltest.Draw(modelShader);
-		
-		LarstTime = glfwGetTime();
-		deltaTime = LarstTime - FristTime;
-		// glfw: swap buffers and poll IO events (keys pressed/released, mouse moved etc.)
-		// -------------------------------------------------------------------------------
-		glfwSwapBuffers(window);
-		glfwPollEvents();
-	}
-
+	Renderer();
+	
 	// glfw: terminate, clearing all previously allocated GLFW resources.
 	// ------------------------------------------------------------------
 	glfwTerminate();
 	return 0;
 }
 
-// process all input: query GLFW whether relevant keys are pressed/released this frame and react accordingly
-// ---------------------------------------------------------------------------------------------------------
-void processInput(GLFWwindow* window)
+/// <summary>
+/// 
+/// </summary>
+void Renderer()
 {
-	if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
-		glfwSetWindowShouldClose(window, true);
+	//=========================
+	Game* game = new Game(window);
+	UI_Manager* ui_Manager = new UI_Manager(window);
+	//=========================
 
-	if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
-		camera.ProcessKeyboard(FORWARD, deltaTime);
-	if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
-		camera.ProcessKeyboard(BACKWARD, deltaTime);
-	if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS)
-		camera.ProcessKeyboard(LEFT, deltaTime);
-	if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
-		camera.ProcessKeyboard(RIGHT, deltaTime);
+
+	while (!glfwWindowShouldClose(window))
+	{
+		glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
+		glClear(GL_COLOR_BUFFER_BIT);
+
+		FristTime = glfwGetTime();
+		game->Update(delta);
+		ui_Manager->Update(delta);
+		
+		game->Draw();
+		ui_Manager->Draw();
+
+
+		glfwSwapBuffers(window);
+		glfwPollEvents();
+		delta = glfwGetTime() -FristTime;
+	}
 }
+
 
 // glfw: whenever the window size changed (by OS or user resize) this callback function executes
 // ---------------------------------------------------------------------------------------------

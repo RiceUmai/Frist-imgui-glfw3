@@ -1,23 +1,10 @@
 #pragma once
-#include <GLFW/glfw3.h>
 
 class Setting
 {
 public:
-	Setting();
-	~Setting();
-
-	static unsigned int SCR_WIDTH;
-	static unsigned int SCR_HEIGHT;
-	GLFWwindow* window;
-private:
-
+	// settings
+	const static unsigned int SCR_WIDTH = 800;
+	const static unsigned int SCR_HEIGHT = 600;
 };
 
-Setting::Setting()
-{
-}
-
-Setting::~Setting()
-{
-}

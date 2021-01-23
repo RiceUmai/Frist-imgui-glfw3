@@ -1,7 +1,8 @@
 #include "UI_Manager.h"
 
-UI_Manager::UI_Manager(GLFWwindow* window)
+UI_Manager::UI_Manager(GLFWwindow* window, Game* game)
 {
+	_game = game;
 	// Setup Dear ImGui context
 	IMGUI_CHECKVERSION();
 	ImGui::CreateContext();
@@ -29,39 +30,46 @@ UI_Manager::~UI_Manager()
 
 void UI_Manager::Update(float delta)
 {
+	//game->Update(delta);
 	ImGui_ImplOpenGL3_NewFrame();
 	ImGui_ImplGlfw_NewFrame();
 	ImGui::NewFrame();
 
 	{
-		static float f = 0.0f;
-		static int counter = 0;
+		static float Speed = 0.0f;
+		static glm::vec3 RotatDir = glm::vec3(0.1f, 0.0f, 0.0f);
+		static glm::vec3 Color = glm::vec3(0.0f ,0.0f ,0.0f);
+		
+		ImGui::Begin("Controller Panel");                          // Create a window called "Hello, world!" and append into it.
+		
+		ImGui::ColorEdit3("Color", &Color.x);
+		_game->SetColor(Color);
 
-		ImGui::SetNextWindowPos(ImVec2(20, 400));
-		ImGui::Begin("Hello, world!");                          // Create a window called "Hello, world!" and append into it.
-		ImGui::Text("This is some useful text.");               // Display some text (you can use a format strings too)
+		ImGui::SliderFloat("Speed", &Speed, 0.0f, 5.0f);            // Edit 1 float using a slider from 0.0f to 1.0f
+		_game->SettestFloat(Speed);
 
-		ImGui::SliderFloat("float", &f, 0.0f, 1.0f);            // Edit 1 float using a slider from 0.0f to 1.0f
+		ImGui::SliderFloat3("RotatDir", &RotatDir.x, 0.0f, 1.0f);
+		_game->SetRotatDir(RotatDir);
+		
+		//ImGui::SliderFloat3("Color", &Color.x, 0.0f, 1.0f);
+		//_game->SetColor(Color);
 
-		if (ImGui::Button("Button"))                            // Buttons return true when clicked (most widgets return true when edited/activated)
-			counter++;
-		ImGui::SameLine();
-		ImGui::Text("counter = %d", counter);
+		//if (ImGui::Button("Button"))                            // Buttons return true when clicked (most widgets return true when edited/activated)
+		//	counter++;
+		//ImGui::SameLine();
+		//ImGui::Text("counter = %d", counter);
 
 		ImGui::GetWindowPos();
 
-
-		ImGui::Text("Application average %.3f ms/frame (%.1f FPS)", 1000.0f / ImGui::GetIO().Framerate, ImGui::GetIO().Framerate);
+		ImGui::Text("(%.1f FPS)", ImGui::GetIO().Framerate);
 		ImGui::End();
 	}
 
 	{
-		ImGui::SetNextWindowPos(ImVec2(20, 20));
-		ImGui::SetNextWindowSize(ImVec2(200, 300));
-
-		ImGui::Begin("Hellssso, ssss!");
-		// Create a window called "Hello, world!" and append into it.
-		ImGui::Text("This is some useful text.");               // Display some text (you can use a format strings too)
+		ImGui::Begin("Position");
+		ImGui::Text("(%.3f,%.3f,%.3f)", _game->camera.Position.x, 
+										_game->camera.Position.y, 
+										_game->camera.Position.z);              
 		ImGui::End();
 	}
 
@@ -69,6 +77,7 @@ void UI_Manager::Update(float delta)
 
 void UI_Manager::Draw()
 {
+	//game->Draw();
 	ImGui::Render();
 	ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 }

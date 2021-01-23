@@ -22,18 +22,29 @@ private:
 	Shader modelShader;
 	Shader testShader;
 
-	Camera camera;
-
 	unsigned int VAO, VBO;
 
+	glm::vec3 RotatDir = glm::vec3(0,0,0);
+	glm::vec3 Color = glm::vec3(0,0,0);
+	
+	float Speed = 0;
+	
 	void processInput(GLFWwindow* window, float deltaTime);
 
 public:
 	Game(GLFWwindow* window);
 	~Game();
-	
+
+	Camera camera;
+
 	void Update(float delta);
 	void Draw();
+
+	float GettestFloat() { return Speed; }
+
+	void SettestFloat(float variable) { Speed = variable; }
+	void SetRotatDir(glm::vec3 variable) { RotatDir = variable; }
+	void SetColor(glm::vec3 color) { Color = color; }
 };
 
 

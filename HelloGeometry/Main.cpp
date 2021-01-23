@@ -6,6 +6,8 @@
 #include "Game.h"
 #include "UI_Manager.h"
 
+//#include "UI_Manager.h"
+
 void framebuffer_size_callback(GLFWwindow* window, int width, int height);
 void Renderer();
 
@@ -64,7 +66,7 @@ void Renderer()
 {
 	//=========================
 	Game* game = new Game(window);
-	UI_Manager* ui_Manager = new UI_Manager(window);
+	UI_Manager* ui_Manager = new UI_Manager(window, game);
 	//=========================
 
 
@@ -96,4 +98,3 @@ void framebuffer_size_callback(GLFWwindow* window, int width, int height)
 	// height will be significantly larger than specified on retina displays.
 	glViewport(0, 0, width, height);
 }
-

@@ -1,11 +1,13 @@
 #include "Game.h"
-#include "Setting.h"
+#include "UI_Manager.h"
 
-Game::Game(GLFWwindow* window) : modeltest("model/newell_teaset/teapot.obj"),
+Game::Game(GLFWwindow* window) : //ui_Manager(window),
+			   modeltest("model/newell_teaset/teapot.obj"),
 			   modelShader("Shader/model_loading.vs", "Shader/model_loading.fs", "Shader/explode.gs"), 
 			   testShader("Shader/test.vs", "Shader/test.fs", "Shader/test.gs"),
 			   camera(glm::vec3(0.0f, 0.0f, 3.0f))
 {
+
 	_window = window;
 	float poins[] = {
 		-0.5f,  0.5f, 1.0f, 0.0f, 0.0f,
@@ -43,6 +45,7 @@ Game::~Game()
 void Game::Update(float delta)
 {
 	processInput(_window, delta);
+
 	glm::mat4 projection = glm::perspective(glm::radians(camera.Zoom), (float)Setting::SCR_WIDTH / (float)Setting::SCR_HEIGHT, 0.1f, 100.0f);
 	glm::mat4 view = camera.GetViewMatrix();
 
@@ -50,16 +53,18 @@ void Game::Update(float delta)
 	modelShader.use();
 	modelShader.setMat4("projection", projection);
 	modelShader.setMat4("view", view);
+	modelShader.setVec3("Color", Color);
 
 	glm::mat4 model = glm::mat4(1.0f);
 	model = glm::translate(model, glm::vec3(0.0f, 0.0f, 0.0f));
-	model = glm::rotate(model, glm::radians((float)glfwGetTime() * 10), glm::vec3(0.0f, 1.0f, 0.0f));
+	model = glm::rotate(model, glm::radians((float)glfwGetTime() * 10), RotatDir);
 	model = glm::scale(model, glm::vec3(0.2f, 0.2f, 0.2f));
 	
 	modelShader.setMat4("model", model);
-	modelShader.setFloat("time", glfwGetTime());
+	modelShader.setFloat("time", glfwGetTime() * Speed);
+	//modelShader.setFloat("time", glfwGetTime());
 	//==================================
-
+	
 }
 
 void Game::Draw()
@@ -72,6 +77,7 @@ void Game::Draw()
 	modelShader.use();
 	modeltest.Draw(modelShader);
 	//==================================
+
 }
 
 void Game::processInput(GLFWwindow* window, float deltaTime)

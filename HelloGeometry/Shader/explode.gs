@@ -10,6 +10,7 @@ in VS_OUT{
 out vec2 TexCoords;
 
 uniform float time;
+uniform float Speed;
 
 vec3 GetNormal()
 {

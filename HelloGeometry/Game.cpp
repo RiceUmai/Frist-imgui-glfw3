@@ -2,10 +2,11 @@
 #include "UI_Manager.h"
 
 Game::Game(GLFWwindow* window) : //ui_Manager(window),
-			   modeltest("model/newell_teaset/teapot.obj"),
-			   modelShader("Shader/model_loading.vs", "Shader/model_loading.fs", "Shader/explode.gs"), 
-			   testShader("Shader/test.vs", "Shader/test.fs", "Shader/test.gs"),
-			   camera(glm::vec3(0.0f, 0.0f, 3.0f))
+			   //modeltest("model/newell_teaset/teapot.obj"),
+	modeltest("model/newell_teaset/teapot.obj"),
+	modelShader("Shader/model_loading.vs", "Shader/model_loading.fs", "Shader/explode.gs"),
+	testShader("Shader/test.vs", "Shader/test.fs", "Shader/test.gs"),
+	camera(glm::vec3(0.0f, 0.0f, 3.0f))
 {
 
 	_window = window;
@@ -59,12 +60,12 @@ void Game::Update(float delta)
 	model = glm::translate(model, glm::vec3(0.0f, 0.0f, 0.0f));
 	model = glm::rotate(model, glm::radians((float)glfwGetTime() * 10), RotatDir);
 	model = glm::scale(model, glm::vec3(0.2f, 0.2f, 0.2f));
-	
+
 	modelShader.setMat4("model", model);
 	modelShader.setFloat("time", glfwGetTime() * Speed);
 	//modelShader.setFloat("time", glfwGetTime());
 	//==================================
-	
+
 }
 
 void Game::Draw()
@@ -82,6 +83,11 @@ void Game::Draw()
 
 void Game::processInput(GLFWwindow* window, float deltaTime)
 {
+	//Mouse input
+	if (glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_LEFT) == GLFW_PRESS)
+		glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
+	//Key Board input
+	//=========================================
 	if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
 		glfwSetWindowShouldClose(window, true);
 
@@ -93,4 +99,28 @@ void Game::processInput(GLFWwindow* window, float deltaTime)
 		camera.ProcessKeyboard(LEFT, deltaTime);
 	if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
 		camera.ProcessKeyboard(RIGHT, deltaTime);
+}
+
+void Game::cursor_position_callback(GLFWwindow* window, double xpos, double ypos)
+{
+	if (firstMouse)
+	{
+		_lastX = xpos;
+		_lastY = ypos;
+		firstMouse = false;
+	}
+
+	float xoffset = xpos - _lastX;
+	float yoffset = _lastY - ypos;
+
+	_lastX = xpos;
+	_lastY = ypos;
+
+	this->camera.ProcessMouseMovement(xoffset, yoffset);
+}
+
+void Game::mouse_button_callback(GLFWwindow* window, int button, int action, int mods)
+{
+	if (button == GLFW_MOUSE_BUTTON_RIGHT && action == GLFW_PRESS)
+		std::cout << "mouce calback" << std::endl;
 }

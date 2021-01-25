@@ -11,9 +11,17 @@
 void framebuffer_size_callback(GLFWwindow* window, int width, int height);
 void Renderer();
 
+void cursor_position_callback(GLFWwindow* window, double xpos, double ypos);
+
+
 float FristTime;
 float delta;
 
+float _lastX = Setting::SCR_WIDTH;
+float _lastY = Setting::SCR_HEIGHT;
+bool firstMouse = true;
+
+Game* game;
 GLFWwindow* window;
 
 int main()
@@ -40,6 +48,7 @@ int main()
 	}
 	glfwMakeContextCurrent(window);
 	glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
+	glfwSetInputMode(window, GLFW_STICKY_MOUSE_BUTTONS, GLFW_TRUE);
 
 	// glad: load all OpenGL function pointers
 	// ---------------------------------------
@@ -48,7 +57,11 @@ int main()
 		std::cout << "Failed to initialize GLAD" << std::endl;
 		return -1;
 	}
+	//=================================================
+	glEnable(GL_DEPTH_TEST);
+	glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 	
+
 	// render loop
 	// -----------
 	Renderer();
@@ -65,15 +78,14 @@ int main()
 void Renderer()
 {
 	//=========================
-	Game* game = new Game(window);
-	UI_Manager* ui_Manager = new UI_Manager(window, game);
+	game = new Game(window);
+	UI_Manager* ui_Maanager = new UI_Manager(window, game);
 	//=========================
-
 
 	while (!glfwWindowShouldClose(window))
 	{
 		glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
-		glClear(GL_COLOR_BUFFER_BIT);
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 		FristTime = glfwGetTime();
 		game->Update(delta);
@@ -97,4 +109,9 @@ void framebuffer_size_callback(GLFWwindow* window, int width, int height)
 	// make sure the viewport matches the new window dimensions; note that width and 
 	// height will be significantly larger than specified on retina displays.
 	glViewport(0, 0, width, height);
+}
+
+void cursor_position_callback(GLFWwindow* window, double xpos, double ypos)
+{
+	game->cursor_position_callback(window, xpos, ypos);
 }

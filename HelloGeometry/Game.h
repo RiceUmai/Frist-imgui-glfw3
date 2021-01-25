@@ -28,7 +28,13 @@ private:
 	glm::vec3 Color = glm::vec3(0,0,0);
 	
 	float Speed = 0;
-	
+
+	float _lastX = Setting::SCR_WIDTH;
+	float _lastY = Setting::SCR_HEIGHT;
+	bool firstMouse = true;
+
+	static float test;
+
 	void processInput(GLFWwindow* window, float deltaTime);
 
 public:
@@ -45,6 +51,8 @@ public:
 	void SettestFloat(float variable) { Speed = variable; }
 	void SetRotatDir(glm::vec3 variable) { RotatDir = variable; }
 	void SetColor(glm::vec3 color) { Color = color; }
-};
 
+	void cursor_position_callback(GLFWwindow* window, double xpos, double ypos);
+	void mouse_button_callback(GLFWwindow* window, int button, int action, int mods);
+}
 

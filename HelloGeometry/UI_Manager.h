@@ -18,7 +18,6 @@ private:
 	Game* _game;
 public:
 	UI_Manager(GLFWwindow* window, Game* game);
-	~UI_Manager();
 
 	void Update(float delta);
 	void Draw();

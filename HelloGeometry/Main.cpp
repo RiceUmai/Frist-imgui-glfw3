@@ -14,7 +14,11 @@ void Renderer();
 float FristTime;
 float delta;
 
+Game* game;
+
 GLFWwindow* window;
+void cursor_position_callback(GLFWwindow* window, double xpos, double ypos);
+void mouse_button_callback(GLFWwindow* window, int button, int action, int mods);
 
 int main()
 {
@@ -48,6 +52,9 @@ int main()
 		std::cout << "Failed to initialize GLAD" << std::endl;
 		return -1;
 	}
+	glEnable(GL_DEPTH_TEST);
+	glfwSetCursorPosCallback(window, cursor_position_callback);
+	glfwSetMouseButtonCallback(window, mouse_button_callback);
 	
 	// render loop
 	// -----------
@@ -65,7 +72,7 @@ int main()
 void Renderer()
 {
 	//=========================
-	Game* game = new Game(window);
+	game = new Game(window);
 	UI_Manager* ui_Manager = new UI_Manager(window, game);
 	//=========================
 
@@ -73,7 +80,7 @@ void Renderer()
 	while (!glfwWindowShouldClose(window))
 	{
 		glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
-		glClear(GL_COLOR_BUFFER_BIT);
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 		FristTime = glfwGetTime();
 		game->Update(delta);
@@ -97,4 +104,14 @@ void framebuffer_size_callback(GLFWwindow* window, int width, int height)
 	// make sure the viewport matches the new window dimensions; note that width and 
 	// height will be significantly larger than specified on retina displays.
 	glViewport(0, 0, width, height);
+}
+
+void mouse_button_callback(GLFWwindow* window, int button, int action, int mods)
+{
+	game->mouse_button_callback(window, button, action, mods);
+}
+
+void cursor_position_callback(GLFWwindow* window, double xpos, double ypos)
+{
+	game->cursor_position_callback(window, xpos, ypos);
 }

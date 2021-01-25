@@ -10,6 +10,9 @@
 
 #include <stb_image.h>
 
+#include <glm/glm.hpp>
+#include <glm/gtc/matrix_transform.hpp>
+
 #include <string>
 #include <sstream>
 #include <iostream>
@@ -23,8 +26,22 @@ class Model
 {
 public:
 	Model(std::string const &path, bool gamma =false) { loadModel(path); };
+	
+	void SetPosition(glm::vec3 pos) { Position = pos; }
+	void SetRotation(glm::vec3 rot) { Rotation = rot; }
+	void SetScale(glm::vec3 scale) { Scale = scale; }
+
+	glm::vec3 GetPosition() { return Position; }
+	glm::vec3 GetRotation() { return Rotation; }
+	glm::vec3 GetScale() { return Scale; }
+
 	void Draw(Shader shader);
+	void Draw(Shader shader, glm::mat4 projection, glm::mat4 view);
 private:
+	glm::vec3 Position = glm::vec3(0, 0, 0);
+	glm::vec3 Rotation = glm::vec3(0, 0, 0);
+	glm::vec3 Scale = glm::vec3(1.0f, 1.0f, 1.0f);
+
 	std::vector<Mesh> meshes;
 	std::vector<Texture> textures_loaded;
 	std::string directory;

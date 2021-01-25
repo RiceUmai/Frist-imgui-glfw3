@@ -8,6 +8,7 @@ in VS_OUT{
 
 //out vec3 fColor;
 out vec2 TexCoords;
+out vec3 normal;
 
 uniform float time;
 uniform float Speed;
@@ -21,14 +22,14 @@ vec3 GetNormal()
 
 vec4 explode(vec4 position, vec3 normal)
 {
-    float magnitude = 2.0f;
+    float magnitude = 0.0f;
     vec3 direction = normal * ((sin(time) + 1.0) / 2.0) * magnitude;
     return position + vec4(direction, 0.0);
 }
 
 
 void main() {
-    vec3 normal = GetNormal();
+    normal = GetNormal();
 
     gl_Position = explode(gl_in[0].gl_Position, normal);
     TexCoords = gs_in[0].texCoords;

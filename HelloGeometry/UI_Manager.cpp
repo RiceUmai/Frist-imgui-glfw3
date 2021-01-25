@@ -37,7 +37,7 @@ void UI_Manager::Update(float delta)
 
 	{
 		static float Speed = 0.0f;
-		static glm::vec3 RotatDir = glm::vec3(0.1f, 0.0f, 0.0f);
+		static glm::vec3 RotatDir = glm::vec3(0.0f, 0.1f, 0.0f);
 		static glm::vec3 Color = glm::vec3(0.0f ,0.0f ,0.0f);
 		
 		ImGui::Begin("Controller Panel");                          // Create a window called "Hello, world!" and append into it.

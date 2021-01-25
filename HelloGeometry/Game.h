@@ -19,6 +19,10 @@ private:
 	GLFWwindow* _window;
 
 	Model modeltest;
+	Model Cube;
+	Model Sphere;
+	Model Bunny;
+
 	Shader modelShader;
 	Shader testShader;
 
@@ -29,6 +33,11 @@ private:
 	
 	float Speed = 0;
 	
+	float _lastX = Setting::SCR_WIDTH;
+	float _lastY = Setting::SCR_HEIGHT;
+	
+	bool firstMouse = true;
+
 	void processInput(GLFWwindow* window, float deltaTime);
 
 public:
@@ -45,6 +54,9 @@ public:
 	void SettestFloat(float variable) { Speed = variable; }
 	void SetRotatDir(glm::vec3 variable) { RotatDir = variable; }
 	void SetColor(glm::vec3 color) { Color = color; }
+
+	void cursor_position_callback(GLFWwindow* window, double xpos, double ypos);
+	void mouse_button_callback(GLFWwindow* window, int button, int action, int mods);
 };
 
 

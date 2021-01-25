@@ -2,6 +2,32 @@
 
 void Model::Draw(Shader shader)
 {
+    shader.use();
+    glm::mat4 model = glm::mat4(1.0f);
+    model = glm::translate(model, Position);
+    //model = glm::rotate(model, glm::radians(90.0f), );
+    model = glm::scale(model, Scale);
+    shader.setMat4("model", model);
+
+    for (unsigned int i = 0; i < meshes.size(); i++)
+    {
+        meshes[i].Draw(shader);
+    }
+    glBindVertexArray(0);
+}
+
+void Model::Draw(Shader shader, glm::mat4 projection, glm::mat4 view)
+{
+    shader.use();
+    
+    glm::mat4 model = glm::mat4(1.0f);
+    model = glm::translate(model, Position);
+    //model = glm::rotate(model, glm::radians(90.0f), );
+    model = glm::scale(model, Scale);
+    shader.setMat4("projection", projection);
+    shader.setMat4("view", view);
+    shader.setMat4("model", model);
+
     for (unsigned int i = 0; i < meshes.size(); i++)
     {
         meshes[i].Draw(shader);

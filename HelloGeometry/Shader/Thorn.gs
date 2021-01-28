@@ -13,6 +13,13 @@ out vec3 normal;
 uniform float time;
 uniform float Speed;
 
+
+float random (vec2 st) {
+    return fract(sin(dot(st.xy,
+                         vec2(12.9898,78.233)))*
+        43758.5453123);
+}
+
 vec3 GetNormal()
 {
     vec3 a = vec3(gl_in[0].gl_Position) - vec3(gl_in[1].gl_Position);
@@ -26,7 +33,7 @@ void main() {
     vec4 CentralPos = (gl_in[0].gl_Position + gl_in[1].gl_Position + gl_in[2].gl_Position) / 3;
     vec2 CenterTex = (gs_in[0].texCoords + gs_in[1].texCoords + gs_in[2].texCoords) / 3;
 
-    CentralPos += vec4(normal, 0) * abs(sin(time)) * 5;
+    CentralPos += vec4(normal, 0) * abs(sin(time)) * 2;
 
     for(int i = 0; i < 3; i++)
     {

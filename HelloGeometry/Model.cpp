@@ -5,7 +5,10 @@ void Model::Draw(Shader shader)
     shader.use();
     glm::mat4 model = glm::mat4(1.0f);
     model = glm::translate(model, Position);
-    //model = glm::rotate(model, glm::radians(90.0f), );
+    if (RotDir != glm::vec3(0, 0, 0))
+    {
+        model = glm::rotate(model, glm::radians(Angle), RotDir);
+    }
     model = glm::scale(model, Scale);
     shader.setMat4("model", model);
 
@@ -22,7 +25,10 @@ void Model::Draw(Shader shader, glm::mat4 projection, glm::mat4 view)
     
     glm::mat4 model = glm::mat4(1.0f);
     model = glm::translate(model, Position);
-    //model = glm::rotate(model, glm::radians(90.0f), );
+    if (RotDir != glm::vec3(0, 0, 0))
+    {
+        model = glm::rotate(model, glm::radians(Angle), RotDir);
+    }    
     model = glm::scale(model, Scale);
     shader.setMat4("projection", projection);
     shader.setMat4("view", view);

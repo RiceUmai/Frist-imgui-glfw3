@@ -18,13 +18,15 @@ class Game
 private:
 	GLFWwindow* _window;
 
-	Model modeltest;
+	Model TeaPort;
 	Model Cube;
 	Model Sphere;
 	Model Bunny;
 
 	Shader modelShader;
-	Shader testShader;
+	Shader explodeShader;
+	Shader Thorn;
+	Shader faceNormal;
 
 	unsigned int VAO, VBO;
 

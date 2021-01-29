@@ -6,8 +6,6 @@
 #include "Game.h"
 #include "UI_Manager.h"
 
-//#include "UI_Manager.h"
-
 void framebuffer_size_callback(GLFWwindow* window, int width, int height);
 void Renderer();
 

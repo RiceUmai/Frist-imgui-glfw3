@@ -1,5 +1,5 @@
 #include "Game.h"
-#include "UI_Manager.h"
+
 
 Game::Game(GLFWwindow* window) : //ui_Manager(window),
 	Cube("model/cube.obj"),
@@ -10,10 +10,13 @@ Game::Game(GLFWwindow* window) : //ui_Manager(window),
 	explodeShader("Shader/model_loading.vs", "Shader/model_loading.fs", "Shader/explode.gs"),
 	Thorn("Shader/model_loading.vs", "Shader/model_loading.fs", "Shader/Thorn.gs"),
 	faceNormal("Shader/model_loading.vs", "Shader/faceNormal.fs", "Shader/faceNormal.gs"),
+	gridShader("Shader/grid.vs", "Shader/grid.fs"),
+	grid(100, 100),
 	camera(glm::vec3(0.0f, 0.0f, 13.0f))
 {
 
 	_window = window;
+	grid.setPosition(glm::vec3(0, -2.0f, 0));
 }
 
 Game::~Game()
@@ -72,6 +75,8 @@ void Game::Draw()
 	Bunny.SetScale(glm::vec3(5.0f, 5.0f, 5.0f));
 	Bunny.Draw(faceNormal, projection, view);
 	//==================================
+	
+	grid.Draw(gridShader, projection, view);
 }
 
 void Game::cursor_position_callback(GLFWwindow* window, double xpos, double ypos)

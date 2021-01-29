@@ -11,6 +11,8 @@
 #include "Shader.h"
 #include "Model.h"
 #include "Camera.h"
+
+#include "Grid.h";
 #include "Setting.h"
 
 class Game
@@ -22,11 +24,15 @@ private:
 	Model Cube;
 	Model Sphere;
 	Model Bunny;
+	
+	Grid grid;
 
 	Shader modelShader;
 	Shader explodeShader;
 	Shader Thorn;
 	Shader faceNormal;
+
+	Shader gridShader;
 
 	unsigned int VAO, VBO;
 

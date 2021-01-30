@@ -1,6 +1,6 @@
 #include "UI_Manager.h"
 
-UI_Manager::UI_Manager(GLFWwindow* window)
+UI_Manager::UI_Manager(GLFWwindow* window) : BackGroundColor(0.2f, 0.3f, 0.3f, 1.0f), faceNormalColor(1.0f), normal_length(0)
 {
 	// Setup Dear ImGui context
 	IMGUI_CHECKVERSION();
@@ -37,6 +37,10 @@ void UI_Manager::Update(float delta)
 	{
 		//ImGui::SliderFloat3("Color", &test.x, 0.0f, 1.0f);
 		ImGui::ColorEdit4("Back Ground Color", &BackGroundColor.x);
+
+		ImGui::ColorEdit3("faceNormal", &faceNormalColor.x);
+		
+		ImGui::SliderFloat("normal_length", &normal_length, 0.0f, 5.0f);
 
 		static int counter;
 

@@ -28,12 +28,13 @@ void main()
     for(int i = 0; i < gl_in.length(); i++)
     {
         vec4 p = gl_in[i].gl_Position;
-        vec3 N = gs_in[i].normal;
+        vec3 N = GetNormal();
 
         gl_Position = p;
         EmitVertex();
 
-        gl_Position = p + vec4(GetNormal() * normal_length , 1.0f);
+
+        gl_Position = p + vec4(N * normal_length , 1.0f);
         EmitVertex();
 
         EndPrimitive();

@@ -15,8 +15,10 @@ class UI_Manager
 {
 private:
 
-	glm::vec4 BackGroundColor = glm::vec4(0.2f, 0.3f, 0.3f, 1.0f);
+	glm::vec4 BackGroundColor;
 	glm::vec3 cameraPositionText;
+	glm::vec3 faceNormalColor;
+	float normal_length;
 		
 public:
 	UI_Manager(GLFWwindow* window);
@@ -26,7 +28,10 @@ public:
 	void Draw();
 
 	glm::vec4 getBackGroundColor() { return BackGroundColor; }
-	
+	glm::vec3 getfaceNormalColor() { return faceNormalColor; }
+
+	float getnormal_length() { return normal_length; }
+
 	float* getBackGroundColor1();
 	
 

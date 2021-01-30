@@ -72,7 +72,8 @@ void Game::Draw()
 
 	faceNormal.use();
 	faceNormal.setFloat("time", (float)glfwGetTime());
-	faceNormal.setFloat("normal_length", 1.0f);
+	faceNormal.setVec3("Color", UI->getfaceNormalColor());
+	faceNormal.setFloat("normal_length", UI->getnormal_length());
 	Bunny.SetPosition(glm::vec3(-20.0f, -0.0f, 0.0f));
 	Bunny.SetScale(glm::vec3(5.0f, 5.0f, 5.0f));
 	Bunny.Draw(faceNormal, projection, view);
@@ -83,32 +84,29 @@ void Game::Draw()
 
 void Game::cursor_position_callback(GLFWwindow* window, double xpos, double ypos)
 {
-	if (firstMouse)
-	{
-		_lastX = xpos;
-		_lastY = ypos;
-		firstMouse = false;
-	}
+	//if (firstMouse)
+	//{
+	//	_lastX = xpos;
+	//	_lastY = ypos;
+	//	firstMouse = false;
+	//}
 
+	//Camera Rotation Controller
 	if (glfwGetInputMode(window, GLFW_CURSOR) == GLFW_CURSOR_DISABLED)
 	{
 		float xoffset = xpos - _lastX;
 		float yoffset = _lastY - ypos;
 
-		_lastX = xpos;
-		_lastY = ypos;
 
 		this->camera.ProcessMouseMovement(xoffset, yoffset);
 	}
+	_lastX = xpos;
+	_lastY = ypos;
 
-
-
-	if (glfwGetInputMode(window, GLFW_CURSOR) == GLFW_CURSOR_NORMAL)
-	{
-		firstMouse = true;
-	}
-
-	std::cout << "(" << xpos << "," << ypos << ")" << std::endl;
+	//if (glfwGetInputMode(window, GLFW_CURSOR) == GLFW_CURSOR_NORMAL)
+	//{
+	//	firstMouse = true;
+	//}
 }
 
 void Game::mouse_button_callback(GLFWwindow* window, int button, int action, int mods)
@@ -128,14 +126,15 @@ void Game::mouse_button_callback(GLFWwindow* window, int button, int action, int
 void Game::processInput(GLFWwindow* window, float deltaTime)
 {
 
-	//===================================================
-	//===================================================
-
-	//===================================================
+	//Program Close======================================
 	//===================================================
 	if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
 		glfwSetWindowShouldClose(window, true);
 
+
+
+	//Camera Movement====================================
+	//===================================================
 	if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
 		camera.ProcessKeyboard(FORWARD, deltaTime);
 	if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)

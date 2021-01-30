@@ -17,6 +17,7 @@ void Model::Draw(Shader shader)
         meshes[i].Draw(shader);
     }
     glBindVertexArray(0);
+
 }
 
 void Model::Draw(Shader shader, glm::mat4 projection, glm::mat4 view)

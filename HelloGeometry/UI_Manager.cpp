@@ -1,8 +1,7 @@
 #include "UI_Manager.h"
 
-UI_Manager::UI_Manager(GLFWwindow* window, Game* game)
+UI_Manager::UI_Manager(GLFWwindow* window)
 {
-	_game = game;
 	// Setup Dear ImGui context
 	IMGUI_CHECKVERSION();
 	ImGui::CreateContext();
@@ -36,28 +35,15 @@ void UI_Manager::Update(float delta)
 	ImGui::NewFrame();
 
 	{
-		static float Speed = 0.0f;
-		static glm::vec3 RotatDir = glm::vec3(0.0f, 0.1f, 0.0f);
-		static glm::vec3 Color = glm::vec3(0.0f ,0.0f ,0.0f);
-		
-		ImGui::Begin("Controller Panel");                          // Create a window called "Hello, world!" and append into it.
-		
-		ImGui::ColorEdit3("Color", &Color.x);
-		_game->SetColor(Color);
+		//ImGui::SliderFloat3("Color", &test.x, 0.0f, 1.0f);
+		ImGui::ColorEdit4("Back Ground Color", &BackGroundColor.x);
 
-		ImGui::SliderFloat("Speed", &Speed, 0.0f, 5.0f);            // Edit 1 float using a slider from 0.0f to 1.0f
-		_game->SettestFloat(Speed);
+		static int counter;
 
-		ImGui::SliderFloat3("RotatDir", &RotatDir.x, 0.0f, 1.0f);
-		_game->SetRotatDir(RotatDir);
-		
-		//ImGui::SliderFloat3("Color", &Color.x, 0.0f, 1.0f);
-		//_game->SetColor(Color);
-
-		//if (ImGui::Button("Button"))                            // Buttons return true when clicked (most widgets return true when edited/activated)
-		//	counter++;
-		//ImGui::SameLine();
-		//ImGui::Text("counter = %d", counter);
+		if (ImGui::Button("Button"))                            // Buttons return true when clicked (most widgets return true when edited/activated)
+			counter++;
+		ImGui::SameLine();
+		ImGui::Text("counter = %d", counter);
 
 		ImGui::GetWindowPos();
 
@@ -67,17 +53,22 @@ void UI_Manager::Update(float delta)
 
 	{
 		ImGui::Begin("Position");
-		ImGui::Text("(%.3f,%.3f,%.3f)", _game->camera.Position.x, 
-										_game->camera.Position.y, 
-										_game->camera.Position.z);              
+		ImGui::Text("(%.3f,%.3f,%.3f)", cameraPositionText.x,
+			cameraPositionText.y,
+			cameraPositionText.z);
 		ImGui::End();
 	}
-
 }
 
 void UI_Manager::Draw()
 {
-	//game->Draw();
 	ImGui::Render();
 	ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
+}
+
+float* UI_Manager::getBackGroundColor1()
+{
+	glm::vec4 vec(BackGroundColor);
+	float* data = glm::value_ptr(vec);
+	return data;
 }

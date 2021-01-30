@@ -4,25 +4,32 @@
 #include "imgui/imgui_impl_opengl3.h"
 #include <stdio.h>
 
+#include <glm/glm.hpp>
+#include <glm/gtc/matrix_transform.hpp>
+#include <glm/gtc/type_ptr.hpp>
+
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
-
-#include "Game.h"
 
 class UI_Manager
 {
 private:
 
-	float test;
-
-	Game* _game;
+	glm::vec4 BackGroundColor = glm::vec4(0.2f, 0.3f, 0.3f, 1.0f);
+	glm::vec3 cameraPositionText;
+		
 public:
-	UI_Manager(GLFWwindow* window, Game* game);
+	UI_Manager(GLFWwindow* window);
 	~UI_Manager();
 
 	void Update(float delta);
 	void Draw();
 
-	float getTest() { return test; }
+	glm::vec4 getBackGroundColor() { return BackGroundColor; }
+	
+	float* getBackGroundColor1();
+	
+
+	void SetcameraPositionText(glm::vec3 pos) { cameraPositionText = pos; }
 };
 

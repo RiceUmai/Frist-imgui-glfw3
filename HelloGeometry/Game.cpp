@@ -1,7 +1,7 @@
 #include "Game.h"
 
 
-Game::Game(GLFWwindow* window) : //ui_Manager(window),
+Game::Game(GLFWwindow* window, UI_Manager* ui) : //ui_Manager(window),
 	Cube("model/cube.obj"),
 	Sphere("model/sphere.obj"),
 	TeaPort("model/newell_teaset/teapot.obj"),
@@ -17,6 +17,7 @@ Game::Game(GLFWwindow* window) : //ui_Manager(window),
 
 	_window = window;
 	grid.setPosition(glm::vec3(0, -2.0f, 0));
+	UI = ui;
 }
 
 Game::~Game()
@@ -35,6 +36,7 @@ void Game::Draw()
 	glm::mat4 projection = glm::perspective(glm::radians(camera.Zoom), (float)Setting::SCR_WIDTH / (float)Setting::SCR_HEIGHT, 0.1f, 100.0f);
 	glm::mat4 view = camera.GetViewMatrix();
 	//==================================
+	UI->SetcameraPositionText(camera.Position);
 
 	//TeaPort Object
 	//==================================
@@ -105,6 +107,8 @@ void Game::cursor_position_callback(GLFWwindow* window, double xpos, double ypos
 	{
 		firstMouse = true;
 	}
+
+	std::cout << "(" << xpos << "," << ypos << ")" << std::endl;
 }
 
 void Game::mouse_button_callback(GLFWwindow* window, int button, int action, int mods)

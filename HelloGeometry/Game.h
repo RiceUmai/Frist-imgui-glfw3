@@ -14,6 +14,7 @@
 
 #include "Grid.h";
 #include "Setting.h"
+#include "UI_Manager.h"
 
 class Game
 {
@@ -31,14 +32,15 @@ private:
 	Shader explodeShader;
 	Shader Thorn;
 	Shader faceNormal;
-
 	Shader gridShader;
 
-	unsigned int VAO, VBO;
+	Camera camera;
 
 	glm::vec3 RotatDir = glm::vec3(0,0,0);
 	glm::vec3 Color = glm::vec3(0,0,0);
 	
+	UI_Manager* UI;
+
 	float Speed = 0;
 	
 	float _lastX = Setting::SCR_WIDTH;
@@ -49,10 +51,9 @@ private:
 	void processInput(GLFWwindow* window, float deltaTime);
 
 public:
-	Game(GLFWwindow* window);
+	Game(GLFWwindow* window, UI_Manager* ui);
 	~Game();
 
-	Camera camera;
 
 	void Update(float delta);
 	void Draw();

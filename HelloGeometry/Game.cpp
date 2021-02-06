@@ -31,7 +31,6 @@ void Game::Update(float delta)
 
 void Game::Draw()
 {
-	//
 	//==================================
 	glm::mat4 projection = glm::perspective(glm::radians(camera.Zoom), (float)Setting::SCR_WIDTH / (float)Setting::SCR_HEIGHT, 0.1f, 100.0f);
 	glm::mat4 view = camera.GetViewMatrix();
@@ -40,6 +39,7 @@ void Game::Draw()
 
 	//TeaPort Object
 	//==================================
+	TeaPort.SetPosition(glm::vec3(0, -1.0f, 0));
 	TeaPort.SetAngle((float)glfwGetTime() * 20);
 	TeaPort.SetRotDir(glm::vec3(0, 1, 0));
 	TeaPort.Draw(modelShader, projection, view);
@@ -84,29 +84,15 @@ void Game::Draw()
 
 void Game::cursor_position_callback(GLFWwindow* window, double xpos, double ypos)
 {
-	//if (firstMouse)
-	//{
-	//	_lastX = xpos;
-	//	_lastY = ypos;
-	//	firstMouse = false;
-	//}
-
-	//Camera Rotation Controller
 	if (glfwGetInputMode(window, GLFW_CURSOR) == GLFW_CURSOR_DISABLED)
 	{
 		float xoffset = xpos - _lastX;
 		float yoffset = _lastY - ypos;
 
-
 		this->camera.ProcessMouseMovement(xoffset, yoffset);
 	}
 	_lastX = xpos;
 	_lastY = ypos;
-
-	//if (glfwGetInputMode(window, GLFW_CURSOR) == GLFW_CURSOR_NORMAL)
-	//{
-	//	firstMouse = true;
-	//}
 }
 
 void Game::mouse_button_callback(GLFWwindow* window, int button, int action, int mods)

@@ -6,19 +6,12 @@ in VS_OUT{
     vec2 texCoords;
 } gs_in[];
 
-//out vec3 fColor;
 out vec2 TexCoords;
 out vec3 normal;
 
 uniform float time;
 uniform float Speed;
 
-
-float random (vec2 st) {
-    return fract(sin(dot(st.xy,
-                         vec2(12.9898,78.233)))*
-        43758.5453123);
-}
 
 vec3 GetNormal()
 {
@@ -56,5 +49,4 @@ void main() {
     gl_Position = gl_in[0].gl_Position;
     EmitVertex();
     EndPrimitive();
-
 }

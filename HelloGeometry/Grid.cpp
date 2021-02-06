@@ -20,7 +20,7 @@ void Grid::Draw(Shader shader, glm::mat4 projection, glm::mat4 view)
 		model = glm::translate(model, glm::vec3(Position.x + i - (Column/2), Position.y, Position.z));
 		model = glm::scale(model, glm::vec3(Column));
 		shader.setMat4("model", model);
-		line.HorizonDraw();
+		line.Draw();
 	}
 
 
@@ -28,8 +28,9 @@ void Grid::Draw(Shader shader, glm::mat4 projection, glm::mat4 view)
 	{
 		glm::mat4 model = glm::mat4(1.0f);
 		model = glm::translate(model, glm::vec3(Position.x, Position.y, Position.z + i - (Row / 2)));
+		model = glm::rotate(model, glm::radians(90.0f) ,glm::vec3(0,1,0));
 		model = glm::scale(model, glm::vec3(Row));
 		shader.setMat4("model", model);
-		line.VerticalDraw();
+		line.Draw();
 	}
 }

@@ -13,12 +13,10 @@ class Line
 {
 private:
 	unsigned int VAO, VBO;
-	unsigned int VAO2, VBO2;
 	float poinsLengh;
 public:
 	Line();
 	~Line();
-	void VerticalDraw();
-	void HorizonDraw();
+	void Draw();
 };
 

@@ -45,6 +45,45 @@ URL : [https://github.com/congibab/Frist-imgui-glfw3](https://github.com/congiba
 1. カメラ回転：マオス右クリックのままドラッグ
 2. カメラ移動：キーボード W(上),S(下),A(左),D(右)
 
+# Grid描画
+
+## source code
+```cpp
+//Grid.cpp
+void Grid::Draw(Shader shader, glm::mat4 projection, glm::mat4 view)
+{
+//=======================
+//中略
+//=======================
+	for (int i = 0; i < Column; i++)
+	{
+		glm::mat4 model = glm::mat4(1.0f);
+		model = glm::translate(model, glm::vec3(Position.x + i - (Column/2), Position.y, Position.z));
+		model = glm::scale(model, glm::vec3(Column));
+		shader.setMat4("model", model);
+		line.Draw();
+	}
+
+//Line.cpp
+float VerticalLine[] = 
+{
+    0.0f , 0.0f,  -0.5f,
+    0.0f , 0.0f,  0.5f,
+};
+
+void Line::Draw()
+{
+	glBindVertexArray(VAO);
+	glDrawArrays(GL_LINES, 0, 2);
+	glBindVertexArray(0);
+}
+
+//Game.cpp
+Grid grid(100, 100);
+grid.setPosition(glm::vec3(0, -2.0f, 0));
+grid.Draw(gridShader, projection, view);
+```
+
 # 背景の色変更
 <center> 
    <img src="./doc/BackGroundColor.JPG" width="50%">

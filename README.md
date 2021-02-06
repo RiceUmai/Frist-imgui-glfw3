@@ -17,11 +17,17 @@ assimp : [https://github.com/assimp/assimp](https://github.com/assimp/assimp)
 2021-01 ~ 制作中
 
 ## 開発人数
-
+個人制作
 ## 参考サイト
 Learn OpenGL : [https://learnopengl.com/](https:/learnopengl.com/)
 
-## 制作意図
+## GitHub URL
+URL : [https://github.com/congibab/Frist-imgui-glfw3](https://github.com/congibab/Frist-imgui-glfw3)
+
+## 目標
+1. Gemotry Shader学習
+2. imGUIライブラリ学習
+3. 3Dモデルにライトを応用してToon Shader実装
 
 # プログラム画面
 <center> 
@@ -29,11 +35,15 @@ Learn OpenGL : [https://learnopengl.com/](https:/learnopengl.com/)
    <img src="./doc/GameScene2.JPG" width="49%">
 </center>
 
-## コンセプト
+## 説明
 1. 3Dモデリングを読み込む(assimp, std_image, glm)
 2. 3DモデリングにShader適用
 3. UI System構築してShaderパラメータ登録(imgui)
 4. Shaderパラメータを修正してShaderを修正
+
+## 操作説明
+1. カメラ回転：マオス右クリックのままドラッグ
+2. カメラ移動：キーボード W(上),S(下),A(左),D(右)
 
 # 背景の色変更
 <center> 
@@ -61,7 +71,7 @@ glClearColor(data[0], data[1], data[2], data[3]);
 # 3D Modeling
 
 <!-- ## Teapot
-<center> 
+<center>
    <img src="./doc/Teapot.JPG" width="49%">
 </center>
 
@@ -122,7 +132,11 @@ void main()
 ## Sphere
 <center>
    <img src="./doc/Sphere2.JPG" width="49%">
+   <!--
    <img src="./doc/Sphere.JPG" width="49%">
+   -->
+   <img src="./doc/Thorn.gif" width="49%">
+
 </center>
 
 <center> 
@@ -132,7 +146,7 @@ void main()
 ### 説明
 時間によって刺が生成
 
-### Gemotry Shader
+### Gemotry Shader(Unity Shader参考)
 ``` glsl
 //Thorn.gs
 //参考サイト : http://www.shaderslab.com/demo-80---triangles-to-pyramids.html
@@ -180,7 +194,10 @@ void main() {
 ## rabbit(explode)
 <center>
    <img src="./doc/rabbit.JPG" width="49%">
+   <!--
    <img src="./doc/explode.JPG" width="49%">
+    -->
+   <img src="./doc/explode.gif" width="49%">
 </center>
 
 <center> 
@@ -232,3 +249,36 @@ void main() {
 <center> 
 左）Shader未適用、右）Shader適用後
 </center>
+
+### 説明
+ポリゴンのNormal Vectorの向きを表示
+
+### Gemotry Shader
+``` glsl
+#version 330 core
+layout (triangles) in;
+layout (line_strip, max_vertices = 6) out;
+
+uniform float normal_length;
+//==============================
+//中略
+//==============================
+void main()
+{
+    normal = GetNormal();
+
+    for(int i = 0; i < gl_in.length(); i++)
+    {
+        vec4 p = gl_in[i].gl_Position;
+        vec3 N = GetNormal();
+
+        gl_Position = p;
+        EmitVertex();
+
+        gl_Position = p + vec4(N * normal_length , 1.0f);
+        EmitVertex();
+
+        EndPrimitive();
+    }
+}
+```

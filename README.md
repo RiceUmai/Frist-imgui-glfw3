@@ -31,8 +31,8 @@ URL : [https://github.com/congibab/Frist-imgui-glfw3](https://github.com/congiba
 
 # プログラム画面
 <center> 
-   <img src="./doc/GameScene1.JPG" width="49%">
-   <img src="./doc/GameScene2.JPG" width="49%">
+   <img src="./doc/GameScene1.JPG" width="45%">
+   <img src="./doc/GameScene2.JPG" width="45%">
 </center>
 
 ## 説明
@@ -131,11 +131,11 @@ void main()
 
 ## Sphere
 <center>
-   <img src="./doc/Sphere2.JPG" width="49%">
+   <img src="./doc/Sphere2.JPG" width="45%">
    <!--
-   <img src="./doc/Sphere.JPG" width="49%">
+   <img src="./doc/Sphere.JPG" width="45%">
    -->
-   <img src="./doc/Thorn.gif" width="49%">
+   <img src="./doc/Thorn.gif" width="45%">
 
 </center>
 
@@ -193,11 +193,11 @@ void main() {
 
 ## rabbit(explode)
 <center>
-   <img src="./doc/rabbit.JPG" width="49%">
+   <img src="./doc/rabbit.JPG" width="45%">
    <!--
-   <img src="./doc/explode.JPG" width="49%">
+   <img src="./doc/explode.JPG" width="45%">
     -->
-   <img src="./doc/explode.gif" width="49%">
+   <img src="./doc/explode.gif" width="45%">
 </center>
 
 <center> 
@@ -242,8 +242,8 @@ void main() {
 
 ## rabbit(nomal face)
 <center>
-   <img src="./doc/nomalFace2.JPG" width="49%">
-   <img src="./doc/nomalFace.JPG" width="49%">
+   <img src="./doc/nomalFace2.JPG" width="45%">
+   <img src="./doc/nomalFace.JPG" width="45%">
 </center>
 
 <center> 

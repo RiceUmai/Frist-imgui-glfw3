@@ -38,7 +38,7 @@ public:
 
 	void Draw(Shader shader);
 	void Draw(Shader shader, glm::mat4 projection, glm::mat4 view);
-private:
+protected:
 	glm::vec3 Position = glm::vec3(0, 0, 0);
 	glm::vec3 RotDir = glm::vec3(0, 0, 0);
 	glm::vec3 Scale = glm::vec3(1.0f, 1.0f, 1.0f);

@@ -109,65 +109,6 @@ glClearColor(data[0], data[1], data[2], data[3]);
 
 # 3D Modeling
 
-<!-- ## Teapot
-<p align= "center">
-   <img src="./doc/Teapot.JPG" width="49%">
-</p>
-
-### C++
-``` cpp
-//Game.cpp
-
-model TeaPort("model/newell_teaset/teapot.obj"),
-shader modelShader("Shader/model_loading.vs", "Shader/model_loading.fs")
-//=============================
-//中略
-//=============================
-//Camera property
-glm::mat4 projection = glm::perspective(glm::radians(camera.Zoom), (float)Setting::SCR_WIDTH / (float)Setting::SCR_HEIGHT, 0.1f, 100.0f);
-glm::mat4 view = camera.GetViewMatrix();
-
-//TeaPort peoperty
-TeaPort.SetPosition(glm::vec3(0, -1.0f, 0));
-TeaPort.SetAngle((float)glfwGetTime() * 20);
-TeaPort.SetRotDir(glm::vec3(0, 1, 0));
-TeaPort.Draw(modelShader, projection, view);
-```
-
-### Vertex Shader
-
-``` glsl
-//model_loading.vs
-#version 330 core
-layout (location = 0) in vec3 aPos;
-layout (location = 1) in vec3 aNormal;
-layout (location = 2) in vec2 aTexCoords;
-//=========================================
-//中略
-//=========================================
-void main()
-{
-    vs_out.texCoords = aTexCoords;
-    vs_out.normal = aNormal;
-    normal = aNormal;
-    gl_Position = projection * view * model * vec4(aPos, 1.0);
-}
-
-```
-
-### Fragment Shader
-``` glsl
-//model_loading.fs
-#version 330 core
-out vec4 FragColor;
-in vec3 normal;
-
-void main()
-{
-    FragColor = vec4(normal, 1);
-}
-``` -->
-
 ## Sphere
 <p align= "center">
    <img src="./doc/Sphere2.JPG" width="45%">

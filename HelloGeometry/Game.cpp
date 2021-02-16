@@ -37,6 +37,9 @@ void Game::Draw()
 	//==================================
 	UI->SetcameraPositionText(camera.Position);
 
+	modelShader.use();
+	modelShader.setFloat("time", (float)glfwGetTime());
+
 	//TeaPort Object
 	//==================================
 	TeaPort.SetPosition(glm::vec3(0, -1.0f, 0));
@@ -94,7 +97,6 @@ void Game::cursor_position_callback(GLFWwindow* window, double xpos, double ypos
 	_lastX = xpos;
 	_lastY = ypos;
 }
-
 void Game::mouse_button_callback(GLFWwindow* window, int button, int action, int mods)
 {
 	if (button == GLFW_MOUSE_BUTTON_RIGHT && action == GLFW_PRESS)

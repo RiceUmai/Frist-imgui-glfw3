@@ -64,14 +64,10 @@ int main()
 	return 0;
 }
 
-/// <summary>
-/// 
-/// </summary>
 void Renderer()
 {
 	//=========================
 	UI_Manager* ui_Manager = new UI_Manager(window);
-
 	game = new Game(window, ui_Manager);
 	//=========================
 
@@ -84,12 +80,15 @@ void Renderer()
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 		FristTime = glfwGetTime();
+
+		//GameScene Renderer
+		//==========================
 		game->Update(delta);
 		ui_Manager->Update(delta);
 		
 		game->Draw();
 		ui_Manager->Draw();
-
+		//==========================
 
 		glfwSwapBuffers(window);
 		glfwPollEvents();

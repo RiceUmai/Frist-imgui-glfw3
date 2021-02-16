@@ -16,11 +16,17 @@ uniform mat4 model;
 uniform mat4 view;
 uniform mat4 projection;
 
+uniform float time;
+
 void main()
 {
     //TexCoords = aTexCoords;
     vs_out.texCoords = aTexCoords;
     vs_out.normal = aNormal;
     normal = aNormal;
+
+    vec3 test = aPos;
+    test.y += sin(test.x * time);
+    
     gl_Position = projection * view * model * vec4(aPos, 1.0);
 }

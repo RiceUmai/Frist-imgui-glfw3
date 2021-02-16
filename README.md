@@ -30,10 +30,10 @@ URL : [https://github.com/congibab/Frist-imgui-glfw3](https://github.com/congiba
 3. 3Dモデルにライトを応用してToon Shader実装
 
 # プログラム画面
-<center> 
+<p align= "center"> 
    <img src="./doc/GameScene1.JPG" width="45%">
    <img src="./doc/GameScene2.JPG" width="45%">
-</center>
+</p>
 
 ## 説明
 1. 3Dモデリングを読み込む(assimp, std_image, glm)
@@ -85,10 +85,10 @@ grid.Draw(gridShader, projection, view);
 ```
 
 # 背景の色変更
-<center> 
+<p align= "center"> 
    <img src="./doc/BackGroundColor.JPG" width="50%">
    <img src="./doc/BackGround.JPG" width="40%">
-</center>
+</p>
 
 ## 説明
 色のパレットを修正して背景色が変わる。
@@ -110,9 +110,9 @@ glClearColor(data[0], data[1], data[2], data[3]);
 # 3D Modeling
 
 <!-- ## Teapot
-<center>
+<p align= "center">
    <img src="./doc/Teapot.JPG" width="49%">
-</center>
+</p>
 
 ### C++
 ``` cpp
@@ -169,18 +169,18 @@ void main()
 ``` -->
 
 ## Sphere
-<center>
+<p align= "center">
    <img src="./doc/Sphere2.JPG" width="45%">
    <!--
    <img src="./doc/Sphere.JPG" width="45%">
    -->
    <img src="./doc/Thorn.gif" width="45%">
 
-</center>
+</p>
 
-<center> 
+<p align= "center"> 
 左）Shader未適用、右）Shader適用後
-</center>
+</p>
 
 ### 説明
 時間によって刺が生成
@@ -231,17 +231,17 @@ void main() {
 ```
 
 ## rabbit(explode)
-<center>
+<p align= "center">
    <img src="./doc/rabbit.JPG" width="45%">
    <!--
    <img src="./doc/explode.JPG" width="45%">
     -->
    <img src="./doc/explode.gif" width="45%">
-</center>
+</p>
 
-<center> 
+<p align= "center"> 
 左）Shader未適用、右）Shader適用後
-</center>
+</p>
 
 ### 説明
 時間によってモデルが小さいポリゴンで分解する。
@@ -280,14 +280,14 @@ void main() {
 ```
 
 ## rabbit(nomal face)
-<center>
+<p align= "center">
    <img src="./doc/nomalFace2.JPG" width="45%">
    <img src="./doc/nomalFace.JPG" width="45%">
-</center>
+</p>
 
-<center> 
+<p align= "center"> 
 左）Shader未適用、右）Shader適用後
-</center>
+</p>
 
 ### 説明
 ポリゴンのNormal Vectorの向きを表示

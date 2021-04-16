@@ -21,8 +21,11 @@ assimp : [https://github.com/assimp/assimp](https://github.com/assimp/assimp)
 ## 参考サイト
 Learn OpenGL : [https://learnopengl.com/](https:/learnopengl.com/)
 
+## 動画(YouTube)
+https://www.youtube.com/watch?v=h1-rcwjNfMk
+
 ## GitHub URL
-URL : [https://github.com/congibab/Frist-imgui-glfw3](https://github.com/congibab/Frist-imgui-glfw3)
+[https://github.com/congibab/Frist-imgui-glfw3](https://github.com/congibab/Frist-imgui-glfw3)
 
 ## 目標
 1. Gemotry Shader学習

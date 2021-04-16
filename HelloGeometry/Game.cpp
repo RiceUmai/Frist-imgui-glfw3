@@ -55,9 +55,12 @@ void Game::Draw()
 
 	//Sphere Object
 	//==================================
+	Sphere.SetPosition(glm::vec3(20.0f, 0.0f, 0));
+	Sphere.Draw(modelShader, projection, view);
+
 	Thorn.use();
 	Thorn.setFloat("time", (float)glfwGetTime());
-	Sphere.SetPosition(glm::vec3(20.0f, 0, 0));
+	Sphere.SetPosition(glm::vec3(20.0f, 5.0f, 0));
 	Sphere.Draw(Thorn, projection, view);
 	//==================================
 
@@ -65,6 +68,10 @@ void Game::Draw()
 	//==================================
 	Bunny.SetPosition(glm::vec3(-10.0f, 0, 0));	
 	Bunny.SetScale(glm::vec3(1.0f, 1.0f, 1.0f));
+	Bunny.Draw(modelShader, projection, view);
+
+	Bunny.SetPosition(glm::vec3(-30.0f, 0, 0));
+	Bunny.SetScale(glm::vec3(3.0f, 3.0f, 3.0f));
 	Bunny.Draw(modelShader, projection, view);
 
 	explodeShader.use();
@@ -78,7 +85,7 @@ void Game::Draw()
 	faceNormal.setVec3("Color", UI->getfaceNormalColor());
 	faceNormal.setFloat("normal_length", UI->getnormal_length());
 	Bunny.SetPosition(glm::vec3(-20.0f, -0.0f, 0.0f));
-	Bunny.SetScale(glm::vec3(5.0f, 5.0f, 5.0f));
+	Bunny.SetScale(glm::vec3(3.0f, 3.0f, 3.0f));
 	Bunny.Draw(faceNormal, projection, view);
 	//==================================
 	

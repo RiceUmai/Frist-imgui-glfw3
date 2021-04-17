@@ -14,15 +14,18 @@ imgui : [https://github.com/ocornut/imgui](https://github.com/ocornut/imgui/)
 assimp : [https://github.com/assimp/assimp](https://github.com/assimp/assimp)  
 
 ## 制作期間
-2021-01 ~ 制作中
+2021-01 ~ 未定
 
 ## 開発人数
 個人制作
+
+
+
 ## 参考サイト
 Learn OpenGL : [https://learnopengl.com/](https:/learnopengl.com/)
 
 ## 動画(YouTube)
-https://www.youtube.com/watch?v=h1-rcwjNfMk
+[https://www.youtube.com/watch?v=h1-rcwjNfMk](https://www.youtube.com/watch?v=h1-rcwjNfMk)
 
 ## GitHub URL
 [https://github.com/congibab/Frist-imgui-glfw3](https://github.com/congibab/Frist-imgui-glfw3)

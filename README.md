@@ -19,7 +19,8 @@ assimp : [https://github.com/assimp/assimp](https://github.com/assimp/assimp)
 ## 開発人数
 個人制作
 
-
+## 製作者
+イゴンヒ
 
 ## 参考サイト
 Learn OpenGL : [https://learnopengl.com/](https:/learnopengl.com/)
@@ -34,6 +35,8 @@ Learn OpenGL : [https://learnopengl.com/](https:/learnopengl.com/)
 1. Gemotry Shader学習
 2. imGUIライブラリ学習
 3. 3Dモデルにライトを応用してToon Shader実装
+
+<div style="page-break-before:always"></div> 
 
 # プログラム画面
 <p align= "center"> 
@@ -50,6 +53,8 @@ Learn OpenGL : [https://learnopengl.com/](https:/learnopengl.com/)
 ## 操作説明
 1. カメラ回転：マオス右クリックのままドラッグ
 2. カメラ移動：キーボード W(上),S(下),A(左),D(右)
+
+<div style="page-break-before:always"></div> 
 
 # Grid描画
 
@@ -90,6 +95,9 @@ grid.setPosition(glm::vec3(0, -2.0f, 0));
 grid.Draw(gridShader, projection, view);
 ```
 
+<div style="page-break-before:always"></div> 
+
+
 # 背景の色変更
 <p align= "center"> 
    <img src="./doc/BackGroundColor.JPG" width="50%">
@@ -113,6 +121,8 @@ float* data = glm::value_ptr(vec);
 glClearColor(data[0], data[1], data[2], data[3]);
 ```
 
+<div style="page-break-before:always"></div> 
+
 # 3D Modeling
 
 ## Sphere
@@ -129,10 +139,10 @@ glClearColor(data[0], data[1], data[2], data[3]);
 左）Shader未適用、右）Shader適用後
 </p>
 
-### 説明
+## 説明
 時間によって刺が生成
 
-### Gemotry Shader(Unity Shader参考)
+## Gemotry Shader(Unity Shader参考)
 ``` glsl
 //Thorn.gs
 //参考サイト : http://www.shaderslab.com/demo-80---triangles-to-pyramids.html
@@ -238,6 +248,8 @@ void main() {
 
 ### 説明
 ポリゴンのNormal Vectorの向きを表示
+
+<div style="page-break-before:always"></div> 
 
 ### Gemotry Shader
 ``` glsl

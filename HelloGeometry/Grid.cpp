@@ -1,4 +1,4 @@
-#include "Grid.h"
+﻿#include "Grid.h"
 
 Grid::Grid(int column, int row) : line(), Column(column), Row(row), Position(glm::vec3(0))
 {

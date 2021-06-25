@@ -1,4 +1,4 @@
-#include "Game.h"
+﻿#include "Game.h"
 
 
 Game::Game(GLFWwindow* window, UI_Manager* ui) : //ui_Manager(window),
@@ -40,7 +40,7 @@ void Game::Draw()
 	modelShader.use();
 	modelShader.setFloat("time", (float)glfwGetTime());
 
-	//TeaPort Object
+	//TeaPort Obje
 	//==================================
 	TeaPort.SetPosition(glm::vec3(0, -1.0f, 0));
 	TeaPort.SetAngle((float)glfwGetTime() * 20);

@@ -1,4 +1,4 @@
-#include "UI_Manager.h"
+﻿#include "UI_Manager.h"
 
 UI_Manager::UI_Manager(GLFWwindow* window) : BackGroundColor(0.2f, 0.3f, 0.3f, 1.0f), faceNormalColor(1.0f), normal_length(0)
 {

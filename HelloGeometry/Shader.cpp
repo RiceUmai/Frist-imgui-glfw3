@@ -1,4 +1,6 @@
-﻿#include "Shader.h"
+﻿//サイト参照
+//https://learnopengl.com/Getting-started/Shaders
+#include "Shader.h"
 
 /// <summary>
 /// Shader Class Constructor

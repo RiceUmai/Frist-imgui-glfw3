@@ -1,4 +1,7 @@
-﻿#include "imgui/imgui.h"
+﻿//サイト産所
+//https://github.com/ocornut/imgui
+//https://learnopengl.com/
+#include "imgui/imgui.h"
 #include "imgui/imgui_impl_glfw.h"
 #include "imgui/imgui_impl_opengl3.h"
 #include <stdio.h>
@@ -14,7 +17,6 @@ float delta;
 
 Game* game;
 
-//
 GLFWwindow* window;
 void cursor_position_callback(GLFWwindow* window, double xpos, double ypos);
 void mouse_button_callback(GLFWwindow* window, int button, int action, int mods);

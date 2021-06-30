@@ -1,4 +1,6 @@
-﻿#include "Model.h"
+﻿//サイト参照
+//https://learnopengl.com/Model-Loading/Model
+#include "Model.h"
 
 void Model::Draw(Shader shader)
 {

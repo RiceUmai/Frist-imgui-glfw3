@@ -1,5 +1,6 @@
 ﻿#include "Grid.h"
 
+
 Grid::Grid(int column, int row) : line(), Column(column), Row(row), Position(glm::vec3(0))
 {
 
@@ -17,6 +18,7 @@ void Grid::Draw(Shader shader, glm::mat4 projection, glm::mat4 view)
 	for (int i = 0; i < Column; i++)
 	{
 		glm::mat4 model = glm::mat4(1.0f);
+
 		model = glm::translate(model, glm::vec3(Position.x + i - (Column/2), Position.y, Position.z));
 		model = glm::scale(model, glm::vec3(Column));
 		shader.setMat4("model", model);

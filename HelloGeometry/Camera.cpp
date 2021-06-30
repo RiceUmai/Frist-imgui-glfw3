@@ -1,4 +1,6 @@
-﻿#include "Camera.h"
+﻿//サイト参照
+//https://learnopengl.com/Getting-started/Transformations
+#include "Camera.h"
 #include <iostream>
 
 Camera::Camera(glm::vec3 position, glm::vec3 up, float yaw, float pitch) :

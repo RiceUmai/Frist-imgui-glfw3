@@ -1,4 +1,7 @@
-﻿#include "UI_Manager.h"
+﻿//サイト参照
+//https://github.com/ocornut/imgui
+
+#include "UI_Manager.h"
 
 UI_Manager::UI_Manager(GLFWwindow* window) : BackGroundColor(0.2f, 0.3f, 0.3f, 1.0f), faceNormalColor(1.0f), normal_length(0)
 {
@@ -34,6 +37,9 @@ void UI_Manager::Update(float delta)
 	ImGui_ImplGlfw_NewFrame();
 	ImGui::NewFrame();
 
+	//=====================
+	//UI生成
+	//=====================
 	{
 		//ImGui::SliderFloat3("Color", &test.x, 0.0f, 1.0f);
 		ImGui::ColorEdit4("Back Ground Color", &BackGroundColor.x);
@@ -44,7 +50,7 @@ void UI_Manager::Update(float delta)
 
 		static int counter;
 
-		if (ImGui::Button("Button"))                            // Buttons return true when clicked (most widgets return true when edited/activated)
+		if (ImGui::Button("Button"))
 			counter++;
 		ImGui::SameLine();
 		ImGui::Text("counter = %d", counter);
@@ -55,6 +61,7 @@ void UI_Manager::Update(float delta)
 		ImGui::End();
 	}
 
+	//カメラpositionを表示するUI
 	{
 		ImGui::Begin("Position");
 		ImGui::Text("(%.3f,%.3f,%.3f)", cameraPositionText.x,

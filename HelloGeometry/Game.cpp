@@ -24,11 +24,19 @@ Game::~Game()
 {
 }
 
+
+/// <summary>
+/// Scene Update
+/// </summary>
+/// <param name="delta"></param>
 void Game::Update(float delta)
 {
 	processInput(_window, delta);
 }
 
+/// <summary>
+/// Scene Draw
+/// </summary>
 void Game::Draw()
 {
 	//==================================
@@ -92,8 +100,15 @@ void Game::Draw()
 	grid.Draw(gridShader, projection, view);
 }
 
+/// <summary>
+/// マウス移動 input
+/// </summary>
+/// <param name="window"></param>
+/// <param name="xpos"></param>
+/// <param name="ypos"></param>
 void Game::cursor_position_callback(GLFWwindow* window, double xpos, double ypos)
 {
+	//Camera回線
 	if (glfwGetInputMode(window, GLFW_CURSOR) == GLFW_CURSOR_DISABLED)
 	{
 		float xoffset = xpos - _lastX;
@@ -104,6 +119,14 @@ void Game::cursor_position_callback(GLFWwindow* window, double xpos, double ypos
 	_lastX = xpos;
 	_lastY = ypos;
 }
+
+/// <summary>
+/// マウスの右、左クリック
+/// </summary>
+/// <param name="window"></param>
+/// <param name="button"></param>
+/// <param name="action"></param>
+/// <param name="mods"></param>
 void Game::mouse_button_callback(GLFWwindow* window, int button, int action, int mods)
 {
 	if (button == GLFW_MOUSE_BUTTON_RIGHT && action == GLFW_PRESS)
@@ -118,6 +141,11 @@ void Game::mouse_button_callback(GLFWwindow* window, int button, int action, int
 	}
 }
 
+/// <summary>
+/// キーボード input
+/// </summary>
+/// <param name="window"></param>
+/// <param name="deltaTime"></param>
 void Game::processInput(GLFWwindow* window, float deltaTime)
 {
 

@@ -1,3 +1,6 @@
+# 한국어 포스팅 링크
+[https://first-hugo-blog.netlify.app/ko/posts/frist-imgui-glfw3/frist-imgui-glfw3/](https://first-hugo-blog.netlify.app/ko/posts/frist-imgui-glfw3/frist-imgui-glfw3/)
+
 # Frist-imgui-glfw3
 
 ## 使用言語, ツール
